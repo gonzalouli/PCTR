@@ -1,0 +1,32 @@
+public class Ejemplohilos1 extends Thread{
+	
+	public void Ejemplohilos1(int tope) {
+		T=tope;
+	}
+	
+	public void run	() {
+		for (int i=0;i<=T;i++) {
+			System.out.println(i);
+		}
+	}
+
+	private int T;
+
+}
+
+	class PruebaHilo1{
+		public static void main(String args[]) throws
+			InterruptedException{
+			
+				EjemploHilos hilo1=new Ejemplohilos(5);
+				Ejemplohilos2 hilo2=new Ejemplohilos(20);
+				
+				hilo1.start();
+				hilo2.start();
+				
+				hilo1.join();
+				hilo2.join();
+				System.out.println("Hilos terminados");
+		
+	}
+}

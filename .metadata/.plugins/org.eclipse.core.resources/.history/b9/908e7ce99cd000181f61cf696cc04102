@@ -1,0 +1,9 @@
+
+public class Paciente() {
+
+	String nombre;
+	String direccion;
+	Long telefono;
+	String seguro;
+	
+}

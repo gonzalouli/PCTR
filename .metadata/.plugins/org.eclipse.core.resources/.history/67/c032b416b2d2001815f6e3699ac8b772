@@ -1,0 +1,36 @@
+import java.util.Random;
+
+public class Automatacelular {
+
+	public static void main(String[] args) {
+
+		 int N=3;
+		///celdas de 0 a 10⁷-1
+		///n=3 con funcion de transicion dada por xi-1(t)+xi(t)+xi+1(t) mod 3
+		
+		 int[] array=new int[10];
+		 int[] aux =new int[10];
+		 
+		 Random rnd=new Random();
+				 
+		 for(int i = 0; i < array.length ; i++) {
+			 
+			 array[i]=rnd.nextInt(N);	 
+		 
+			 System.out.print(array[i]+"," );
+		 }
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+
+}
