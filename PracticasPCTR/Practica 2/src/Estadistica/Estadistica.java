@@ -1,3 +1,5 @@
+package Estadistica;
+
 import java.util.Scanner;
 
 public class Estadistica {

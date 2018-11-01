@@ -1,23 +1,34 @@
 import java.util.Random;
 import java.util.Scanner;
 
-public class matVectorConcurrente implements Runnable {
+public class matVectorConcurrenten implements Runnable {
 	
 	
-	public int multiplicamatriz(int a,int b) {
-		private int a,b,sol;
-	
-		
-		
+	public class multiplicamatriz   {
+				
+		public multiplicamatriz(int [][]matriz, int [] vector,int j) {
+			
+		this.matriz=matriz;
+		this.vector=vector;
+		this.j=j;
 	}
+	
+
+	private int [][]matriz;
+	private int []vector;
+	private int j;
+	private int sol=0;
+	
 		public void run() {
 		
+			for( int i=0;i<vector.length;i++)
+				sol=sol+vector[j]*matriz[i][j];
 		
 	}
 	
 
 
-	public static void main(String[] args) {
+	public void main(String[] args) throws Exception{
 		
 		Scanner scan=new Scanner(System.in);
 		Random rand=new Random();
@@ -57,17 +68,19 @@ public class matVectorConcurrente implements Runnable {
 				}
 			}
 	
-			multiplicamatriz[] mulm=new multiplicamatriz[x];
-			
+			multiplicamatriz []mulm=new multiplicamatriz[x];
 			
 			for(i=0;i<mulm.length;i++) {
 				
-				///aqui hay que instanciar un nuevo hilo por cada entrada en el bucle
-				mulm[i]=new multiplicamatriz(i,j);
-				mul[i].start();
+				mulm[i] = new multiplicamatriz(matriz,vector,i);
+				new Thread(mulm[i]).start();
+			
 			}
-
-
+			
+			for(multiplicamatriz f:mulm) {
+				new Thread(mulm[i]).join();
+			}
 	}
 	}
+}
 }
