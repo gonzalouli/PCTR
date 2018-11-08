@@ -1,34 +1,28 @@
 import java.util.Random;
 import java.util.Scanner;
 
-public class matVectorConcurrente implements Runnable {
-	
-	
+public class matVectorConcurrente implements Runnable {	
 	private int [][]matriz;
 	private int []vector;
 	private int i;
 	private int sol[];
 
-	
 	public matVectorConcurrente(int [][]matriz, int [] vector,int i, int [] solucion) {
-		
-		this.matriz=matriz;
-		this.vector=vector;
-		this.i=i;
-	
-		}
-	
-public void run() {
-		
-			for( int j=0;j<vector.length;j++)
-				sol[i]=sol[i]+vector[j]*matriz[i][j];
-		
+		this.matriz = matriz;
+		this.vector = vector;
+		this.sol = solucion;
+		this.i = i;
 	}
 	
-
-
-	public static void main(String[] args) throws Exception{
+	public void run() {
+		sol[i]=0;
+		for(int j = 0;j < vector.length; j++)
+			sol[i] = sol[i]+vector[j]*matriz[i][j];
+	}
 		
+	
+	
+	public static void main(String[] args) throws Exception{		
 		Scanner scan=new Scanner(System.in);
 		Random rand=new Random();
 		
@@ -67,25 +61,24 @@ public void run() {
 				}
 			}
 		}
-			matVectorConcurrente []mulm=new matVectorConcurrente[x];
+		matVectorConcurrente []mulm=new matVectorConcurrente[x];
+		
+		
+		for(i=0;i<mulm.length;i++) {
 			
+			mulm[i] = new matVectorConcurrente(matriz,vector,i,solucion);
 			
-			for(i=0;i<mulm.length;i++) {
-				
-				mulm[i] = new matVectorConcurrente(matriz,vector,i,solucion);
-				
-			
-			}
-						
-			for(i=0 ; i<mulm.length;i++) {
-				new Thread(mulm[i]).start();
-			}
-			for(i=0 ; i<mulm.length;i++)
-				new Thread(mulm[i]).join();
+		
+		}
+					
+		for(i=0 ; i<mulm.length;i++) {
+			new Thread(mulm[i]).start();
+		}
+		for(i=0 ; i<mulm.length;i++)
+			new Thread(mulm[i]).join();
 	
-			for( i=0;i<x;i++)
-				System.out.print( solucion[i]+",");
-	}
-	
+		for( i=0;i<x;i++)
+			System.out.print( solucion[i]+",");
+	}	
 }
 
